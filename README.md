@@ -1,2 +1,2 @@
 # citrus
-An app developed in GTK4 and libadwaita with the purpose of listening to radio stations.
+A media player developed in Python, and uses GTK3.
