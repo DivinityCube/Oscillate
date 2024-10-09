@@ -1,2 +1,2 @@
 # citrus
-A media player developed in Python, and uses GTK3.
+A media player developed in Python. Uses GTK4 and Libadwaita.
