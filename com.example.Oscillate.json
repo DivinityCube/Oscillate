@@ -1,0 +1,34 @@
+{
+    "app-id": "com.example.Oscillate",
+    "runtime": "org.gnome.Platform",
+    "runtime-version": "47",
+    "sdk": "org.gnome.Sdk",
+    "command": "oscillate",
+    "finish-args": [
+        "--share=ipc",
+        "--socket=fallback-x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--socket=pulseaudio",
+        "--filesystem=host:ro",
+        "--metadata=X-DConf=migrate-path=/org/gnome/Oscillate/"
+    ],
+    "modules": [
+        {
+            "name": "oscillate",
+            "builddir": true,
+            "buildsystem": "meson",
+            "build-options": {
+                "env": {
+                    "PYTHON_PATH": "/app/bin/python3"
+                }
+            },
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": "."
+                }
+            ]
+        }
+    ]
+}

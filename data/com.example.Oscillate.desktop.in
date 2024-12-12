@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=oscillate
+Exec=oscillate
+Icon=com.example.Oscillate
+Terminal=false
+Type=Application
+Categories=Utility;
+Keywords=GTK;
+StartupNotify=true
+DBusActivatable=true

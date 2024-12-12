@@ -1,0 +1,8 @@
+# List of source files containing translatable strings.
+# Please keep this file sorted alphabetically.
+data/com.example.Oscillate.desktop.in
+data/com.example.Oscillate.metainfo.xml.in
+data/com.example.Oscillate.gschema.xml
+src/main.py
+src/window.py
+src/window.ui

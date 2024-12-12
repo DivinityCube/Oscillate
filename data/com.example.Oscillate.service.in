@@ -1,0 +1,3 @@
+[D-BUS Service]
+Name=com.example.Oscillate
+Exec=@bindir@/oscillate --gapplication-service
