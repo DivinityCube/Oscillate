@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+  <schema id="com.example.Oscillate" path="/com/example/Oscillate/">
+    <!-- Playback settings -->
+    <key name="autoplay" type="b">
+      <default>false</default>
+      <summary>Auto-play</summary>
+      <description>Automatically start playing when adding songs</description>
+    </key>
+
+    <key name="remember-position" type="b">
+      <default>true</default>
+      <summary>Remember playback position</summary>
+      <description>Resume from last position when reopening songs</description>
+    </key>
+
+    <key name="gapless-playback" type="b">
+      <default>true</default>
+      <summary>Gapless playback</summary>
+      <description>Remove silence between tracks</description>
+    </key>
+
+    <key name="volume-control-type" type="s">
+      <default>'linear'</default>
+      <summary>Volume control type</summary>
+      <description>How volume changes are applied (linear or logarithmic)</description>
+    </key>
+
+    <key name="volume" type="d">
+      <default>1.0</default>
+      <summary>Volume level</summary>
+      <description>Volume level in the application</description>
+    </key>
+
+    <!-- Interface settings -->
+    <key name="show-album-art" type="b">
+      <default>true</default>
+      <summary>Show album art</summary>
+      <description>Display album artwork when available</description>
+    </key>
+
+    <key name="show-time-remaining" type="b">
+      <default>false</default>
+      <summary>Show time remaining</summary>
+      <description>Display remaining time instead of duration</description>
+    </key>
+
+    <key name="save-playlist" type="b">
+      <default>true</default>
+      <summary>Save playlist</summary>
+      <description>Remember playlist when closing the application</description>
+    </key>
+  </schema>
+</schemalist>
+

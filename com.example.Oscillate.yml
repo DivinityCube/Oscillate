@@ -1,0 +1,19 @@
+app-id: com.example.Oscillate
+runtime: org.gnome.Platform
+runtime-version: "47"
+sdk: org.gnome.Sdk
+command: oscillate
+
+modules:
+  - name: oscillate
+    buildsystem: meson
+    build-commands:
+      - meson setup --prefix=/app build
+      - ninja -C build
+      - ninja -C build install
+    sources:
+      - type: dir
+        path: .
+        exclude:
+          - .git/
+          - build/

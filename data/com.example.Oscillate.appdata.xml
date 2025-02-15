@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.example.Oscillate.desktop</id>
+  <name>Oscillate</name>
+  <summary>A modern music player</summary>
+  <description>
+    <p>Oscillate is a lightweight, GTK-based media player.</p>
+  </description>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>GPL-3.0</project_license>
+  <developer_name>Tay Rake</developer_name>
+  <releases>
+    <release version="1.5.O-INDEV" date="2025-02-03"/>
+  </releases>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">none</content_attribute>
+    <content_attribute id="social-chat">none</content_attribute>
+  </content_rating>
+</component>

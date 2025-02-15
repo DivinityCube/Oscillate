@@ -40,9 +40,9 @@ class OscillateApplication(Adw.Application):
             application_name='Oscillate',
             application_icon='com.example.Oscillate',
             developer_name='Tay Rake',
-            version='1.4-INDEV',
+            version='1.5-INDEV',
             developers=['Tay Rake'],
-            copyright='© 2024 Tay Rake'
+            copyright='© 2024 - 2025 Tay Rake'
         )
         about.present()
 

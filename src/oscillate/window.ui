@@ -11,6 +11,7 @@
         <child>
           <object class="GtkBox">
             <property name="orientation">vertical</property>
+            <!-- Main Header Bar -->
             <child>
               <object class="AdwHeaderBar" id="headerbar">
                 <child type="start">
@@ -26,13 +27,15 @@
                 </child>
               </object>
             </child>
+            <!-- Split View Container -->
             <child>
               <object class="AdwOverlaySplitView" id="overlay_split_view">
+                <!-- Sidebar (Playlist) -->
                 <property name="sidebar">
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
                     <property name="width-request">300</property>
-                    <!-- Playlist header -->
+                    <!-- Playlist Header -->
                     <child>
                       <object class="AdwHeaderBar">
                         <property name="title-widget">
@@ -48,7 +51,7 @@
                         </style>
                       </object>
                     </child>
-                    <!-- Playlist content -->
+                    <!-- Playlist Content -->
                     <child>
                       <object class="GtkScrolledWindow">
                         <property name="hexpand">true</property>
@@ -63,31 +66,97 @@
                         </child>
                       </object>
                     </child>
-                    <!-- Bottom controls -->
+                    <!-- Bottom Controls with Search and Delete -->
                     <child>
-                      <object class="GtkActionBar">
+                      <object class="GtkBox">
+                        <property name="orientation">vertical</property>
+                        <!-- Search Revealer -->
                         <child>
-                          <object class="GtkBox">
-                            <property name="margin-start">6</property>
-                            <property name="margin-end">6</property>
-                            <property name="margin-top">6</property>
-                            <property name="margin-bottom">6</property>
-                            <property name="spacing">6</property>
-                            <style>
-                              <class name="toolbar"/>
-                            </style>
+                          <object class="GtkRevealer" id="search_revealer">
+                            <property name="reveal-child">false</property>
+                            <property name="transition-type">slide-down</property>
                             <child>
-                              <object class="GtkButton" id="select_all_button">
-                                <property name="icon-name">edit-select-all-symbolic</property>
-                                <property name="tooltip-text">Select All</property>
+                              <object class="GtkSearchEntry" id="search_entry">
+                                <property name="placeholder-text">Search songs...</property>
+                                <property name="margin-start">6</property>
+                                <property name="margin-end">6</property>
+                                <property name="margin-top">6</property>
+                                <property name="margin-bottom">6</property>
                               </object>
                             </child>
-                            <child  >
-                              <object class="GtkButton" id="delete_button">
-                                <property name="icon-name">user-trash-symbolic</property>
-                                <property name="tooltip-text">Delete Selected</property>
-                                <property name="halign">end</property>
-                                <property name="hexpand">true</property>
+                          </object>
+                        </child>
+                        <!-- Delete Confirmation Revealer -->
+                        <child>
+                          <object class="GtkRevealer" id="delete_revealer">
+                            <property name="reveal-child">false</property>
+                            <property name="transition-type">slide-down</property>
+                            <child>
+                              <object class="GtkActionBar">
+                                <property name="margin-top">6</property>
+                                <property name="margin-bottom">6</property>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="orientation">horizontal</property>
+                                    <child>
+                                      <object class="GtkButton" id="cancel_delete_button">
+                                        <property name="label">Cancel</property>
+                                        <property name="halign">start</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkBox">
+                                        <property name="hexpand">true</property>
+                                      </object>
+                                    </child>
+                                    <child>
+                                      <object class="GtkButton" id="confirm_delete_button">
+                                        <property name="label">Delete</property>
+                                        <property name="halign">end</property>
+                                        <style>
+                                          <class name="destructive-action"/>
+                                        </style>
+                                      </object>
+                                    </child>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <!-- Control Buttons -->
+                        <child>
+                          <object class="GtkActionBar">
+                            <child>
+                              <object class="GtkBox">
+                                <property name="margin-start">6</property>
+                                <property name="margin-end">6</property>
+                                <property name="margin-top">6</property>
+                                <property name="margin-bottom">6</property>
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkToggleButton" id="search_button">
+                                    <property name="icon-name">system-search-symbolic</property>
+                                    <property name="tooltip-text">Search Playlist</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="select_all_button">
+                                    <property name="icon-name">checkbox-empty-symbolic</property>
+                                    <property name="css-classes">circular</property>
+                                    <property name="tooltip-text">Select All</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkBox">
+                                    <property name="hexpand">true</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="delete_button">
+                                    <property name="icon-name">user-trash-symbolic</property>
+                                  </object>
+                                </child>
                               </object>
                             </child>
                           </object>
@@ -96,6 +165,7 @@
                     </child>
                   </object>
                 </property>
+                <!-- Main Content Area -->
                 <property name="content">
                   <object class="GtkBox">
                     <property name="orientation">vertical</property>
@@ -137,106 +207,107 @@
                         </child>
                       </object>
                     </child>
+                    <!-- Playback Controls -->
+                    <child>
+                      <object class="GtkBox" id="controls_box">
+                        <property name="orientation">vertical</property>
+                        <property name="margin-start">12</property>
+                        <property name="margin-end">12</property>
+                        <property name="margin-bottom">12</property>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="orientation">horizontal</property>
+                            <property name="spacing">6</property>
+                            <child>
+                              <object class="GtkLabel" id="time_position_label">
+                                <property name="label">00:00</property>
+                                <style>
+                                  <class name="caption"/>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkScale" id="song_progress_scale">
+                                <property name="orientation">horizontal</property>
+                                <property name="draw-value">false</property>
+                                <property name="hexpand">true</property>
+                                <property name="adjustment">
+                                  <object class="GtkAdjustment">
+                                    <property name="lower">0</property>
+                                    <property name="upper">100</property>
+                                    <property name="value">0</property>
+                                    <property name="step-increment">1</property>
+                                  </object>
+                                </property>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkLabel" id="time_duration_label">
+                                <property name="label">00:00</property>
+                                <style>
+                                  <class name="caption"/>
+                                  <class name="dim-label"/>
+                                </style>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                        <child>
+                          <object class="GtkBox">
+                            <property name="halign">center</property>
+                            <property name="spacing">12</property>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkButton" id="previous_button">
+                                    <property name="icon-name">media-skip-backward-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="play_button">
+                                    <property name="icon-name">media-playback-start-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkButton" id="next_button">
+                                    <property name="icon-name">media-skip-forward-symbolic</property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                            <child>
+                              <object class="GtkBox">
+                                <property name="spacing">6</property>
+                                <child>
+                                  <object class="GtkButton" id="mute_button">
+                                    <property name="icon-name">audio-volume-high-symbolic</property>
+                                  </object>
+                                </child>
+                                <child>
+                                  <object class="GtkScale" id="volume_scale">
+                                    <property name="orientation">horizontal</property>
+                                    <property name="draw-value">false</property>
+                                    <property name="width-request">100</property>
+                                    <property name="adjustment">
+                                      <object class="GtkAdjustment">
+                                        <property name="lower">0</property>
+                                        <property name="upper">1</property>
+                                        <property name="value">1</property>
+                                        <property name="step-increment">0.05</property>
+                                      </object>
+                                    </property>
+                                  </object>
+                                </child>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
                   </object>
                 </property>
-              </object>
-            </child>
-            <child>
-              <object class="GtkBox" id="controls_box">
-                <property name="orientation">vertical</property>
-                <property name="margin-start">12</property>
-                <property name="margin-end">12</property>
-                <property name="margin-bottom">12</property>
-                <child>
-                  <object class="GtkBox">
-                    <property name="orientation">horizontal</property>
-                    <property name="spacing">6</property>
-                    <child>
-                      <object class="GtkLabel" id="time_position_label">
-                        <property name="label">00:00</property>
-                        <style>
-                          <class name="caption"/>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkScale" id="song_progress_scale">
-                        <property name="orientation">horizontal</property>
-                        <property name="draw-value">false</property>
-                        <property name="hexpand">true</property>
-                        <property name="adjustment">
-                          <object class="GtkAdjustment">
-                            <property name="lower">0</property>
-                            <property name="upper">100</property>
-                            <property name="value">0</property>
-                            <property name="step-increment">1</property>
-                          </object>
-                        </property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkLabel" id="time_duration_label">
-                        <property name="label">00:00</property>
-                        <style>
-                          <class name="caption"/>
-                          <class name="dim-label"/>
-                        </style>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-                <child>
-                  <object class="GtkBox">
-                    <property name="halign">center</property>
-                    <property name="spacing">12</property>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkButton" id="previous_button">
-                            <property name="icon-name">media-skip-backward-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="play_button">
-                            <property name="icon-name">media-playback-start-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkButton" id="next_button">
-                            <property name="icon-name">media-skip-forward-symbolic</property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkBox">
-                        <property name="spacing">6</property>
-                        <child>
-                          <object class="GtkButton" id="mute_button">
-                            <property name="icon-name">audio-volume-high-symbolic</property>
-                          </object>
-                        </child>
-                        <child>
-                          <object class="GtkScale" id="volume_scale">
-                            <property name="orientation">horizontal</property>
-                            <property name="draw-value">false</property>
-                            <property name="width-request">100</property>
-                            <property name="adjustment">
-                              <object class="GtkAdjustment">
-                                <property name="lower">0</property>
-                                <property name="upper">1</property>
-                                <property name="value">1</property>
-                                <property name="step-increment">0.05</property>
-                              </object>
-                            </property>
-                          </object>
-                        </child>
-                      </object>
-                    </child>
-                  </object>
-                </child>
               </object>
             </child>
           </object>
@@ -244,6 +315,7 @@
       </object>
     </child>
   </template>
+  <!-- Application Menu -->
   <menu id="primary_menu">
     <section>
       <item>
@@ -257,4 +329,3 @@
     </section>
   </menu>
 </interface>
-
