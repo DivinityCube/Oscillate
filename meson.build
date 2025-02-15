@@ -1,11 +1,28 @@
 project('oscillate',
-    version: '0.1.0',
-    meson_version: '>= 0.59.0'
+    version: '1.5-INDEV',
+    meson_version: '>= 0.59.0',
+    default_options: [
+    'warning_level=2',
+    'werror=false',
+  ],
 )
 
 python = import('python')
-python_installation = python.find_installation('python3')
+py_installation = python.find_installation('python3', required: true, modules: ['gi'])
+
 gnome = import('gnome')
+
+compiled_schemas = gnome.compile_schemas(
+  build_by_default: true,
+  depend_files: 'data/glib-2.0/schemas/com.example.Oscillate.gschema.xml'
+)
+
+install_subdir('src', install_dir: get_option('prefix'))
+
+install_data(
+  'data/glib-2.0/schemas/com.example.Oscillate.gschema.xml',
+  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
+)
 
 # Dependencies
 dependency('glib-2.0')
@@ -19,13 +36,11 @@ resources = gnome.compile_resources(
     source_dir: 'src',
     gresource_bundle: true,
     install: true,
-    install_dir: python_installation.get_install_dir() / 'oscillate'
+    install_dir: py_installation.get_install_dir() / 'oscillate'
 )
 
-# Install GSchema
-install_data(
-    'data/com.example.Oscillate.gschema.xml',
-    install_dir: get_option('datadir') / 'glib-2.0' / 'schemas'
+install_data('com.example.Oscillate.gschema.xml',
+  install_dir: join_paths(get_option('datadir'), 'glib-2.0/schemas')
 )
 
 # Install Python package
@@ -37,10 +52,9 @@ python_sources = [
     'src/oscillate/preferences.py',
 ]
 
-python_installation.install_sources(
-    python_sources,
-    pure: true,
-    subdir: 'oscillate'
+py_installation.install_sources(
+  python_sources,
+  subdir: 'oscillate'
 )
 
 # Install UI file

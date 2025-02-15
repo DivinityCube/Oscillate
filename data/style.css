@@ -1,0 +1,12 @@
+checkbutton.circular {
+  padding: 0;
+  margin: 0 6px 0 0;
+  min-width: 24px;
+  min-height: 24px;
+  border-radius: 9999px;
+}
+
+checkbutton.circular:checked {
+  background-color: @accent_bg_color;
+  color: @accent_fg_color;
+}
